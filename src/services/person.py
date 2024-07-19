@@ -72,10 +72,7 @@ class PersonService(Service):
 
 
 @lru_cache()
-def get_person_service(
-    cache: Cache = Depends(get_cache_service),
-    elastic: AsyncElasticsearch = Depends(get_elastic),
-    film_service: FilmService = Depends(get_film_service),
+def get_person_service(cache: Cache = Depends(get_cache_service), elastic: AsyncElasticsearch = Depends(get_elastic), film_service: FilmService = Depends(get_film_service),
 ) -> PersonService:
     return PersonService(
         cache, search_service=ElasticSearchService(elastic, index="persons"), film_service=film_service
